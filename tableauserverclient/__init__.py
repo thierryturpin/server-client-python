@@ -16,6 +16,7 @@ from .models import (
     HourlyInterval,
     IntervalItem,
     JobItem,
+    JsonWebTokenAuth,
     MetricItem,
     MonthlyInterval,
     PaginationItem,

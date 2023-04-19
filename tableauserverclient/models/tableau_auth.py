@@ -68,3 +68,17 @@ class PersonalAccessTokenAuth(Credentials):
         return "<PersonalAccessToken name={} token={}>(site={})".format(
             self.token_name, self.personal_access_token[:2] + "...", self.site_id
         )
+
+class JsonWebTokenAuth(Credentials):
+    def __init__(self, json_web_token, site_id=None):
+        super().__init__(site_id=site_id)
+        self.json_web_token = json_web_token
+
+    @property
+    def credentials(self):
+        return {
+            "jwt": self.json_web_token,
+        }
+
+    def __repr__(self):
+        return "<jwt={}>".format(self.json_web_token)

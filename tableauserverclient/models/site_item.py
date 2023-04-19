@@ -94,6 +94,7 @@ class SiteItem(object):
         time_zone=None,
         auto_suspend_refresh_enabled: bool = True,
         auto_suspend_refresh_inactivity_window: int = 30,
+        attribute_capture_enabled: bool = True,
     ):
         self._admin_mode = None
         self._id: Optional[str] = None
@@ -147,6 +148,7 @@ class SiteItem(object):
         self.time_zone = time_zone
         self.auto_suspend_refresh_enabled = auto_suspend_refresh_enabled
         self.auto_suspend_refresh_inactivity_window = auto_suspend_refresh_inactivity_window
+        self.attrbute_capture_enabled = attribute_capture_enabled
 
     @property
     def admin_mode(self) -> Optional[str]:
@@ -588,6 +590,14 @@ class SiteItem(object):
     def auto_suspend_refresh_enabled(self, value: bool):
         self._auto_suspend_refresh_enabled = value
 
+    @property
+    def attribute_capture_enabled(self) -> bool:
+        return self._attribute_capture_enabled
+
+    @attribute_capture_enabled.setter
+    def attribute_capture_enabled(self, value: bool):
+        self._attribute_capture_enabled = value
+
     def replace_license_tiers_with_user_quota(self, value: int) -> None:
         self.tier_creator_capacity = None
         self.tier_explorer_capacity = None
@@ -650,6 +660,7 @@ class SiteItem(object):
                 time_zone,
                 auto_suspend_refresh_enabled,
                 auto_suspend_refresh_inactivity_window,
+                aatribute_capture_enabled,
             ) = self._parse_element(site_xml, ns)
 
             self._set_values(
@@ -704,6 +715,7 @@ class SiteItem(object):
                 time_zone,
                 auto_suspend_refresh_enabled,
                 auto_suspend_refresh_inactivity_window,
+                attribute_capture_enabled,
             )
         return self
 
@@ -760,6 +772,7 @@ class SiteItem(object):
         time_zone,
         auto_suspend_refresh_enabled,
         auto_suspend_refresh_inactivity_window,
+        attribute_capture_enabled,
     ):
         if id is not None:
             self._id = id
@@ -867,6 +880,8 @@ class SiteItem(object):
             self.auto_suspend_refresh_enabled = auto_suspend_refresh_enabled
         if auto_suspend_refresh_inactivity_window is not None:
             self.auto_suspend_refresh_inactivity_window = auto_suspend_refresh_inactivity_window
+        if attribute_capture_enabled is not None:
+            self.attribute_capture_enabled = attribute_capture_enabled
 
     @classmethod
     def from_response(cls, resp, ns) -> List["SiteItem"]:
@@ -926,6 +941,7 @@ class SiteItem(object):
                 time_zone,
                 auto_suspend_refresh_enabled,
                 auto_suspend_refresh_inactivity_window,
+                attribute_capture_enabled,
             ) = cls._parse_element(site_xml, ns)
 
             site_item = cls(name, content_url)
@@ -981,6 +997,7 @@ class SiteItem(object):
                 time_zone,
                 auto_suspend_refresh_enabled,
                 auto_suspend_refresh_inactivity_window,
+                attribute_capture_enabled,
             )
             all_site_items.append(site_item)
         return all_site_items
@@ -1062,6 +1079,7 @@ class SiteItem(object):
 
         flows_enabled = string_to_bool(site_xml.get("flowsEnabled", ""))
         cataloging_enabled = string_to_bool(site_xml.get("catalogingEnabled", ""))
+        attribute_capture_enbaled = string_to_bool(site_xml.get("attributeCaptureEnabled", ""))
 
         return (
             id,
@@ -1115,6 +1133,7 @@ class SiteItem(object):
             time_zone,
             auto_suspend_refresh_enabled,
             auto_suspend_refresh_inactivity_window,
+            attribute_capture_enbaled,
         )
 
 
