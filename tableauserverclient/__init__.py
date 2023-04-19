@@ -1,6 +1,48 @@
 from ._version import get_versions
 from .namespace import NEW_NAMESPACE as DEFAULT_NAMESPACE
+<<<<<<< HEAD
 from .models import *
+=======
+from .models import (
+    BackgroundJobItem,
+    ColumnItem,
+    ConnectionCredentials,
+    ConnectionItem,
+    DQWItem,
+    DailyInterval,
+    DataAlertItem,
+    DatabaseItem,
+    DatasourceItem,
+    FlowItem,
+    FlowRunItem,
+    GroupItem,
+    HourlyInterval,
+    IntervalItem,
+    JobItem,
+    JsonWebTokenAuth,
+    MetricItem,
+    MonthlyInterval,
+    PaginationItem,
+    Permission,
+    PermissionsRule,
+    PersonalAccessTokenAuth,
+    ProjectItem,
+    RevisionItem,
+    ScheduleItem,
+    SiteItem,
+    SubscriptionItem,
+    TableItem,
+    TableauAuth,
+    Target,
+    TaskItem,
+    UnpopulatedPropertyError,
+    UserItem,
+    ViewItem,
+    WebhookItem,
+    WeeklyInterval,
+    WorkbookItem,
+)
+>>>>>>> 8dc6ae3 (Initial changes. I will add a sample)
 from .server import (
     CSVRequestOptions,
     ExcelRequestOptions,

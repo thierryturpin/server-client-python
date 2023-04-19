@@ -684,6 +684,8 @@ class SiteRequest(object):
             site_element.attrib["autoSuspendRefreshInactivityWindow"] = str(
                 site_item.auto_suspend_refresh_inactivity_window
             )
+        if site_item.attribute_capture_enabled is not None:
+            site_element.attrib["attributeCaptureEnabled"] = str(site_item.attribute_capture_enabled).lower()
 
         return ET.tostring(xml_request)
 
@@ -788,6 +790,8 @@ class SiteRequest(object):
             site_element.attrib["autoSuspendRefreshInactivityWindow"] = str(
                 site_item.auto_suspend_refresh_inactivity_window
             )
+        if site_item.attribute_capture_enabled is not None:
+            site_element.attrib["attributeCaptureEnabled"] = str(site_item.attribute_capture_enabled).lower()
 
         return ET.tostring(xml_request)
 
