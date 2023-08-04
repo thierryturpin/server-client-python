@@ -150,6 +150,8 @@ class Endpoint(object):
 
         # a request can, for stuff like publishing, spin for ages waiting for a response.
         # we need some user-facing activity so they know it's not dead.
+        """
+        comment out this code to fix perf issues 
         request_timeout = self.parent_srv.http_options.get("timeout") or 0
         server_response: Optional["Response"] = self.send_request_while_show_progress_threaded(
             method, url, parameters, request_timeout
@@ -159,7 +161,8 @@ class Endpoint(object):
         if server_response is None:
             logger.debug(server_response)
             logger.debug("[{}] Async request failed: retrying".format(datetime.timestamp()))
-            server_response = self._blocking_request(method, url, parameters)
+        """
+        server_response = self._blocking_request(method, url, parameters)
         if server_response is None:
             logger.debug("[{}] Request failed".format(datetime.timestamp()))
             raise RuntimeError
