@@ -6,6 +6,7 @@ import os
 from contextlib import closing
 from pathlib import Path
 
+from tableauserverclient.helpers.headers import fix_filename
 from .endpoint import QuerysetEndpoint, api, parameter_added_in
 from .exceptions import InternalServerError, MissingRequiredFieldError
 from .permissions_endpoint import _PermissionsEndpoint
@@ -453,7 +454,7 @@ class Workbooks(QuerysetEndpoint):
     def download_revision(
         self,
         workbook_id: str,
-        revision_number: str,
+        revision_number: Optional[str],
         filepath: Optional[PathOrFileW] = None,
         include_extract: bool = True,
         no_extract: Optional[bool] = None,
@@ -485,6 +486,7 @@ class Workbooks(QuerysetEndpoint):
                     filepath.write(chunk)
                 return_path = filepath
             else:
+                params = fix_filename(params)
                 filename = to_filename(os.path.basename(params["filename"]))
                 download_path = make_download_path(filepath, filename)
                 with open(download_path, "wb") as f:
